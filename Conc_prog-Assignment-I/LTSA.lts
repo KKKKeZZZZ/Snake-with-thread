@@ -1,0 +1,11 @@
+CLIENT = (send_login_request -> BUFFER | send_move_request -> SERVER),
+BUFFER = (process_request -> SERVER),
+SERVER = (populate_snake -> MAP | change_status -> SNAKE | update_gamestate -> CLIENT | game_over -> DEAD),
+MAP = (update_map -> SERVER),
+DEAD = (show_game_over -> CLIENT),
+SNAKE = (update_snake -> SERVER).
+
+PLAYER = (send_login_request -> SERVER | send_move_request -> SERVER),
+SERVER = (update_gamestate -> PLAYER | show_game_over -> PLAYER).
+
+||GAME = (PLAYER || CLIENT).
